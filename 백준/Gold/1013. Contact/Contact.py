@@ -14,7 +14,7 @@ for _ in range(n):
                 break
             s = s[1:]
             while s[:1] == "1":
-                if len(s)>=3 and s[:3] == "100":
+                if s[:3] == "100":
                     break
                 else:
                     s = s[1:]
