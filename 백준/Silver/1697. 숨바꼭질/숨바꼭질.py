@@ -3,21 +3,20 @@ import sys
 input=sys.stdin.readline
 
 n,k=map(int,input().split())
-max_num=100000
-visited=[0]*(max_num+1)
 
-def bfs(n):
-  q=deque()
-  q.append(n)
-  global k
-  
-  while q:
-    x=q.popleft()
-    if x==k:
-      return visited[x]
-    for i in (x-1,x+1,x*2):
-      if 0<=i<=max_num and visited[i]==0:
-        visited[i]=visited[x]+1
-        q.append(i)
+def bfs(n,k):
+    queue = deque([(n,0)])
+    visited = [False]*(100000+1)
+    visited[n] = True
 
-print(bfs(n))
+    while queue:
+        node,time = queue.popleft()
+        possible_routes = [node-1, node+1, node*2]
+        if node == k:
+            return time
+        for new in possible_routes:
+            if 0<=new<=100000 and not visited[new] :
+                queue.append((new,time+1))
+                visited[new] = True
+
+print(bfs(n,k))
